@@ -1,6 +1,7 @@
 package com.gestaohospitalar.hpt.hptmobile;
 
 import android.graphics.PorterDuff;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -35,10 +36,12 @@ public class TelaLoginActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
-                        loginButton.getBackground().setColorFilter(0xe0454545, PorterDuff.Mode.SRC_ATOP);
+                        loginButton.getBackground().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+                        loginButton.invalidate();
                         break;
                     case MotionEvent.ACTION_UP:
                         loginButton.getBackground().clearColorFilter();
+                        loginButton.invalidate();
                         break;
                 }
                 return false;

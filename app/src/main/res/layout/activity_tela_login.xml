@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gestaohospitalar.hpt.hptmobile.TelaLoginActivity"
-    android:background="@color/colorPrimaryLight">
+    android:background="@color/colorPrimaryDark">
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -31,9 +31,9 @@
             android:id="@+id/usernameEdittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/passwordEdittext"
             android:layout_alignLeft="@+id/passwordEdittext"
             android:layout_alignRight="@+id/passwordEdittext"
-            android:layout_above="@+id/passwordEdittext"
             android:inputType="text"/>
 
         <EditText
@@ -50,7 +50,7 @@
             android:text="Entrar"
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_centerInParent="true"
             android:layout_below="@+id/passwordEdittext"/>
 
