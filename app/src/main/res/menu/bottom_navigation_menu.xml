@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/geral"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Geral"/>
+
+    <item
+        android:id="@+id/aba2"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Aba 2"/>
+    <item
+        android:id="@+id/aba3"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="Aba 3"/>
+    <item
+        android:id="@+id/aba4"
+        android:icon="@drawable/ic_menu_share"
+        android:title="Aba 4"/>
+    <item
+        android:id="@+id/aba5"
+        android:icon="@drawable/ic_menu_manage"
+        android:title="Aba 5"/>
+
+</menu>
