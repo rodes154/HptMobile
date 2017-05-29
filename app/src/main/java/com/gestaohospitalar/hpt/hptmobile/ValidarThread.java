@@ -1,34 +1,25 @@
 package com.gestaohospitalar.hpt.hptmobile;
 
+import android.os.AsyncTask;
+
 /**
  * Created by rodrigo on 29/05/17.
  */
 
-public class ValidarThread extends Thread {
-
-    String username;
-    String password;
-    boolean loginRealizado = false;
+public class ValidarThread extends AsyncTask <String[], Boolean ,Boolean> {
 
     @Override
-    public void run(){
-        synchronized (this){
-            ValidarCredenciais validarCredenciais = new ValidarCredenciais();
-            if(validarCredenciais.validar(username,password)){
-                loginRealizado = true;
-                notifyAll();
-            }else{
-                System.out.println("Senha incorreta");
-                notifyAll();
-            }
+    protected Boolean doInBackground(String[]... params) {
 
+        ValidarCredenciais validarCredenciais = new ValidarCredenciais();
+
+
+        System.out.println(params[0][0]+"   "+params[0][1]);
+        if(validarCredenciais.validar(params[0][0],params[0][1])){
+            return true;
+        }else{
+            System.out.println("Senha incorreta");
+            return false;
         }
-    }
-    public void inserirCredenciais(String nome, String senha){
-        username=nome;
-        password=senha;
-    }
-    public boolean getStatus(){
-        return loginRealizado;
     }
 }

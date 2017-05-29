@@ -31,7 +31,7 @@ public class ConexaoWebService {
     }
 
     public void adicionarAtributo(String nomeAtributo, Object o){
-        soap.addProperty(nomeAtributo,o.toString());
+        soap.addProperty(nomeAtributo,o);
     }
     public Object realizarConexao(){
         envelope.setOutputSoapObject(soap);

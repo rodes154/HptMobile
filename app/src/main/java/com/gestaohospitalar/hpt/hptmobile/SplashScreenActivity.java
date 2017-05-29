@@ -4,14 +4,14 @@ package com.gestaohospitalar.hpt.hptmobile;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -59,26 +59,30 @@ public class SplashScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
-    public void loginButtonClicked() {
+    public void loginButtonClicked(){
+        loadingGif.setVisibility(View.VISIBLE);
         ValidarThread validarThread = new ValidarThread();
-        validarThread.inserirCredenciais(usernameEdittext.getText().toString(),passwordEdittext.getText().toString());
-        validarThread.start();
-        synchronized (validarThread){
-            try {
-                validarThread.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if(validarThread.getStatus()){
+        String[] params = new String[2];
+        params[0]=usernameEdittext.getText().toString();
+        params[1]=passwordEdittext.getText().toString();
+        try {
+            if(validarThread.execute(params).get()){
                 Intent intent = new Intent(this,HomeActivity.class);
                 startActivity(intent);
                 finish();
             }else{
+                loadingGif.setVisibility(View.INVISIBLE);
                 senhaIncorretaTextView.setVisibility(View.VISIBLE);
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
-
     }
 }
