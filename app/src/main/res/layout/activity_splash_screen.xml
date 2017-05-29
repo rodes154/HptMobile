@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/splash_background_cinza"
+    tools:context="com.gestaohospitalar.hpt.hptmobile.SplashScreenActivity">
+
+    <EditText
+        android:id="@+id/loginEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hptLogoImage"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Nome de Usuário"
+        android:inputType="textPersonName"
+        android:textColorLink="@color/colorWhite"/>
+
+    <EditText
+        android:id="@+id/passEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/loginEditText"
+        android:layout_alignStart="@+id/loginEditText"
+        android:layout_below="@+id/loginEditText"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:textColorLink="@android:color/white" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo_image_shadow_mobile"
+        android:layout_alignParentTop="true"
+        android:maxWidth="200dp"
+        android:maxHeight="200dp"
+        android:id="@+id/hptLogoImage"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:text="HPT Gestão Hospitalar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gestaoHospitalar"
+        android:textStyle="normal|bold"
+        android:textColor="#dbdbdb"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/passEditText"
+        android:layout_alignLeft="@+id/passEditText"
+        android:layout_alignRight="@+id/passEditText"
+        android:layout_alignStart="@+id/passEditText"
+        android:layout_below="@+id/passEditText"
+        android:background="@drawable/login_button"
+        android:text="Entrar"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/suporteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/loginButton"
+        android:layout_below="@+id/loginButton"
+        android:clickable="true"
+        android:text="Suporte"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/senhaIncorretaTextView"
+        android:text="Login ou senha incorretos."
+        android:visibility="invisible"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loadingGif"
+        android:layout_centerHorizontal="true"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loadingGif"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:background="@drawable/ajax_loader"
+        android:layout_below="@id/loginButton"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
