@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HptMobile</string>
+    <string name="login">Entrar</string>
 </resources>

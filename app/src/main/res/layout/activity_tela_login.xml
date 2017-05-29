@@ -47,12 +47,20 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:text="Entrar"
+            android:text="@string/login"
             android:background="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_centerInParent="true"
             android:layout_below="@+id/passwordEdittext"/>
+        <TextView
+            android:id="@+id/respostaCredenciaisTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/loginButton"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
 
 
 
