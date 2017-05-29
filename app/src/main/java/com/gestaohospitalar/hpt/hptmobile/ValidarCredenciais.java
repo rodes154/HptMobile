@@ -10,13 +10,17 @@ public class ValidarCredenciais {
 
     public boolean validar(String login, String senha){
 
-        conexaoWebService.classe("ChecarLogin");
-        conexaoWebService.metodo("checarLogin");
-        conexaoWebService.adicionarAtributo(login);
-        conexaoWebService.adicionarAtributo(senha);
+        conexaoWebService.metodo("validarLogin");
+        conexaoWebService.classe("ValidarLogin");
+        conexaoWebService.adicionarAtributo("user",login);
+        conexaoWebService.adicionarAtributo("pass",senha);
         Object resposta = conexaoWebService.realizarConexao();
 
-        return (boolean)resposta;
-
+        if(resposta.toString().equals("true")){
+            System.out.println("logged in");
+            return true;
+        }else{
+            return false;
+        }
     }
 }

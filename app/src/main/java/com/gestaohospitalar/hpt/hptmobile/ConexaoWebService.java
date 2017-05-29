@@ -18,10 +18,8 @@ public class ConexaoWebService {
 
     private SoapObject soap;
     private SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER10);
-    private HttpTransportSE httpTrans;
-    private int soapCount=0;
+    private HttpTransportSE httpTrans = new HttpTransportSE("http://192.168.0.123:8080/HptMobileWebService/services/ValidarLogin?wsdl");
     private String metodo;
-    private Object nullObject;
 
     public void metodo(String nomeMetodo){
         soap = new SoapObject("http://ws.apache.org/axis2",nomeMetodo);
@@ -29,17 +27,16 @@ public class ConexaoWebService {
     }
 
     public void classe(String nomeClasse){
-        httpTrans = new HttpTransportSE("http://189.5.142.240:8080/WebServiceTest/services/"+nomeClasse+"?wsdl");
+        httpTrans = new HttpTransportSE("http://192.168.0.123:8080/HptMobileWebService/services/"+nomeClasse+"?wsdl");
     }
 
-    public void adicionarAtributo(Object o){
-        soap.addProperty(String.valueOf(soapCount),o);
-        soapCount++;
+    public void adicionarAtributo(String nomeAtributo, Object o){
+        soap.addProperty(nomeAtributo,o.toString());
     }
     public Object realizarConexao(){
         envelope.setOutputSoapObject(soap);
         try {
-            httpTrans.call(metodo,envelope);
+            httpTrans.call("validarLogin",envelope);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
@@ -49,7 +46,7 @@ public class ConexaoWebService {
             return envelope.getResponse();
         } catch (SoapFault soapFault) {
             soapFault.printStackTrace();
-            return nullObject;
+            return false;
         }
     }
 

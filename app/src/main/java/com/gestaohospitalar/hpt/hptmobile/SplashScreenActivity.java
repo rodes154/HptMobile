@@ -4,6 +4,7 @@ package com.gestaohospitalar.hpt.hptmobile;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -58,13 +59,26 @@ public class SplashScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     public void loginButtonClicked() {
-
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
+        ValidarThread validarThread = new ValidarThread();
+        validarThread.inserirCredenciais(usernameEdittext.getText().toString(),passwordEdittext.getText().toString());
+        validarThread.start();
+        synchronized (validarThread){
+            try {
+                validarThread.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(validarThread.getStatus()){
+                Intent intent = new Intent(this,HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                senhaIncorretaTextView.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 }
