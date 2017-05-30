@@ -1,24 +1,39 @@
 package com.gestaohospitalar.hpt.hptmobile;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomBar;
-    private TextView toolBarTitle;
-    private Button buttonConfig1;
+    private Button configButton;
+    private ListView aba5ListView;
 
     //Layouts
     RelativeLayout geralLayout,aba2Layout,aba3Layout,aba4Layout,aba5Layout;
@@ -28,12 +43,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        //Componentes em geral
+        aba5ListView = (ListView) (findViewById(R.id.aba5ListView));
+
         //Barras de ferramentas
         bottomBar = (BottomNavigationView)(findViewById(R.id.navigationBar));
-        toolBarTitle = (TextView)(findViewById(R.id.toolbarTitle));
-
-
-
+        configButton = (Button) (findViewById(R.id.configButton));
 
         //Layouts
         geralLayout = (RelativeLayout) (findViewById(R.id.abaGeralLayout));
@@ -41,6 +56,13 @@ public class HomeActivity extends AppCompatActivity {
         aba3Layout = (RelativeLayout)(findViewById(R.id.aba3Layout));
         aba4Layout = (RelativeLayout)(findViewById(R.id.aba4Layout));
         aba5Layout = (RelativeLayout)(findViewById(R.id.aba5Layout));
+
+        configButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup(v);
+            }
+        });
 
 
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -92,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
                 aba4Layout.setVisibility(View.VISIBLE);
                 break;
             case 5:
-                aba5Layout.setVisibility(View.VISIBLE);
+                carregarAba5();
                 break;
         }
 
@@ -104,10 +126,22 @@ public class HomeActivity extends AppCompatActivity {
         inflater.inflate(R.menu.configuration_menu, popup.getMenu());
         popup.show();
     }
+    public void carregarAba5(){
 
-    private void abrirSobreActivity(){
-        //Intent sobreIntent = new Intent(this, SobreActivity.class);
-       // startActivity(sobreIntent);
+        ConsultarVersoes consultar = new ConsultarVersoes();
+        String[] listaVersoes = new String[1];
+        try {
+            listaVersoes = consultar.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaVersoes);
+        System.out.println(listaVersoes);
+        aba5ListView.setAdapter(adapter);
+        aba5Layout.setVisibility(View.VISIBLE);
     }
 
 }

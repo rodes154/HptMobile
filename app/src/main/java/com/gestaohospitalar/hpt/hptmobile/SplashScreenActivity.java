@@ -59,9 +59,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 return false;
             }
         });
-        Intent intent = new Intent(this,HomeActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     public void loginButtonClicked(){
