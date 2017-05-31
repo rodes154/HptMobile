@@ -20,7 +20,7 @@ public class ConexaoWebService {
     private SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER10);
     private HttpTransportSE httpTrans;
     private String met;
-    private Object nullObject;
+    private Object nullObject = false;
 
     public void metodo(String nomeMetodo){
         soap = new SoapObject("http://ws.apache.org/axis2",nomeMetodo);
@@ -28,7 +28,8 @@ public class ConexaoWebService {
     }
 
     public void classe(String nomeClasse){
-        httpTrans = new HttpTransportSE("http://192.168.0.123:8080/HptMobileWebService/services/"+nomeClasse+"?wsdl");
+        httpTrans = new HttpTransportSE("http://127.0.0.1:8080/HptMobileWebService/services/"+nomeClasse+"?wsdl");
+        httpTrans = new HttpTransportSE("http://127.0.0.1:8080/HptMobileWebService/services/ValidarLogin?wsdl");
     }
 
     public void adicionarAtributo(String nomeAtributo, Object o){
