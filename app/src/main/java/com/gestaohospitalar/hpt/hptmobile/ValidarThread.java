@@ -11,14 +11,18 @@ public class ValidarThread extends AsyncTask <String[], Boolean ,Boolean> {
     @Override
     protected Boolean doInBackground(String[]... params) {
 
-        ValidarCredenciais validarCredenciais = new ValidarCredenciais();
+        ConexaoWebService conexaoWebService = new ConexaoWebService();
 
+        conexaoWebService.metodo("validarLogin");
+        conexaoWebService.classe("ValidarLogin");
+        conexaoWebService.adicionarAtributo("user",params[0][0]);
+        conexaoWebService.adicionarAtributo("pass",params[0][1]);
+        Object resposta = conexaoWebService.realizarConexao();
 
-        System.out.println(params[0][0]+"   "+params[0][1]);
-        if(validarCredenciais.validar(params[0][0],params[0][1])){
+        if(resposta.toString().equals("true")){
+            System.out.println("logged in");
             return true;
         }else{
-            System.out.println("Senha incorreta");
             return false;
         }
     }
