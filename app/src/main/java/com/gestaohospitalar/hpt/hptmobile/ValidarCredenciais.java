@@ -6,7 +6,7 @@ import android.os.AsyncTask;
  * Created by rodrigo on 29/05/17.
  */
 
-public class ValidarThread extends AsyncTask <String[], Boolean ,Boolean> {
+public class ValidarCredenciais extends AsyncTask <String[], Boolean ,Boolean> {
 
     @Override
     protected Boolean doInBackground(String[]... params) {

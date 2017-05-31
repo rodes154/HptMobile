@@ -63,12 +63,12 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     public void loginButtonClicked(){
         loadingGif.setVisibility(View.VISIBLE);
-        ValidarThread validarThread = new ValidarThread();
+        ValidarCredenciais validarCredenciais = new ValidarCredenciais();
         String[] params = new String[2];
         params[0]=usernameEdittext.getText().toString();
         params[1]=passwordEdittext.getText().toString();
         try {
-            if(validarThread.execute(params).get()){
+            if(validarCredenciais.execute(params).get()){
                 Intent intent = new Intent(this,HomeActivity.class);
                 startActivity(intent);
                 finish();
