@@ -103,16 +103,17 @@
 
 
         <FrameLayout
+            android:id="@+id/aba5Layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/aba5Layout">
+            android:visibility="invisible">
 
             <RelativeLayout
-                android:orientation="vertical"
-                android:visibility="invisible"
                 android:id="@+id/aba5ListLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="invisible">
 
                 <ListView
                     android:id="@+id/aba5ListView"
@@ -122,9 +123,18 @@
 
                 </ListView>
 
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/aba5LoadingImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/ajax_loader"
+                    android:visibility="invisible" />
+
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/aba5TextLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="invisible">
@@ -133,7 +143,10 @@
                     android:id="@+id/aba5LogTextView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="vertical" />
+                    android:verticalScrollbarPosition="right"
+                    android:scrollbars="vertical"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorWhite"/>
 
 
             </RelativeLayout>

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,11 @@ import java.util.Map;
  */
 
 public class ConsultarVersoes extends AsyncTask<Void, Void ,List<Object>>{
+
+    private WeakReference<HomeActivity> homeActivityWeakReference;
+    public ConsultarVersoes(HomeActivity callback){
+        homeActivityWeakReference = new WeakReference<HomeActivity>(callback);
+    }
 
     @Override
     protected List<Object> doInBackground(Void... params) {
@@ -51,5 +57,13 @@ public class ConsultarVersoes extends AsyncTask<Void, Void ,List<Object>>{
         lista.add(data);
 
         return lista;
+    }
+
+    @Override
+    protected void onPostExecute(List<Object> objects) {
+        HomeActivity ref = homeActivityWeakReference.get();
+        if (ref != null) {
+            ref.carregarAba5(objects);
+        }
     }
 }

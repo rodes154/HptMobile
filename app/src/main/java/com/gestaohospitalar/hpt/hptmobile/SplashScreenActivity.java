@@ -63,23 +63,21 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     public void loginButtonClicked(){
         loadingGif.setVisibility(View.VISIBLE);
-        ValidarCredenciais validarCredenciais = new ValidarCredenciais();
+        ValidarCredenciais validarCredenciais = new ValidarCredenciais(this);
         String[] params = new String[2];
         params[0]=usernameEdittext.getText().toString();
         params[1]=passwordEdittext.getText().toString();
-        try {
-            if(validarCredenciais.execute(params).get()){
-                Intent intent = new Intent(this,HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }else{
-                loadingGif.setVisibility(View.INVISIBLE);
-                senhaIncorretaTextView.setVisibility(View.VISIBLE);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        validarCredenciais.execute(params);
+    }
+
+    public void realizarLogin(boolean b){
+        if(b){
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            loadingGif.setVisibility(View.INVISIBLE);
+            senhaIncorretaTextView.setVisibility(View.VISIBLE);
         }
     }
 }

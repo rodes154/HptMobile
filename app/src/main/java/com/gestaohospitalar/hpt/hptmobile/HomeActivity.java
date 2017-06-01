@@ -12,6 +12,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,21 +27,33 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class HomeActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomBar;
     private Button configButton;
     private ListView aba5ListView;
+    private TextView aba5LogTextView;
+    private GifImageView aba5Loading;
 
     //Layouts
-    RelativeLayout geralLayout,aba2Layout,aba3Layout,aba4Layout,aba5ListLayout;
+    RelativeLayout geralLayout,aba2Layout,aba3Layout,aba4Layout,aba5ListLayout,aba5TextLayout;
     FrameLayout aba5Layout;
+
+    //Listas
+    List<Object> listaGeral;
+
+    //Variaveis
+    Boolean versoesCarregadas = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +62,8 @@ public class HomeActivity extends AppCompatActivity {
 
         //Componentes em geral
         aba5ListView = (ListView) (findViewById(R.id.aba5ListView));
+        aba5LogTextView = (TextView) (findViewById(R.id.aba5LogTextView));
+        aba5Loading = (GifImageView) (findViewById(R.id.aba5LoadingImageView));
 
         //Barras de ferramentas
         bottomBar = (BottomNavigationView)(findViewById(R.id.navigationBar));
@@ -61,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         aba4Layout = (RelativeLayout)(findViewById(R.id.aba4Layout));
         aba5Layout = (FrameLayout) (findViewById(R.id.aba5Layout));
         aba5ListLayout = (RelativeLayout) findViewById(R.id.aba5ListLayout);
+        aba5TextLayout = (RelativeLayout) findViewById(R.id.aba5TextLayout);
 
         configButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,19 +88,17 @@ public class HomeActivity extends AppCompatActivity {
         aba5ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch ((int)id){
-                    case 1:
-                        System.out.println("1");
 
-                    case 2:
-                        System.out.println("2");
+                aba5LogTextView.setText(((ArrayList<String>) (listaGeral.get(2))).get((int)id));
 
-                    case 3:
-                        System.out.println("3");
+                System.out.println(aba5LogTextView.getText());
+                aba5ListLayout.setVisibility(View.INVISIBLE);
+                aba5TextLayout.setVisibility(View.VISIBLE);
 
-                }
             }
         });
+
+        aba5LogTextView.setMovementMethod(new ScrollingMovementMethod());
 
 
 
@@ -137,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
                 aba4Layout.setVisibility(View.VISIBLE);
                 break;
             case 5:
-                carregarAba5();
+                executarConsultarVersoes();
                 break;
         }
 
@@ -149,24 +163,34 @@ public class HomeActivity extends AppCompatActivity {
         inflater.inflate(R.menu.configuration_menu, popup.getMenu());
         popup.show();
     }
-    public void carregarAba5(){
 
-        ConsultarVersoes consultar = new ConsultarVersoes();
-        List<Object> listaGeral = new  ArrayList<>();
-        List<String> listaVersoes = new ArrayList<>();
-        try {
-            listaGeral = consultar.execute().get();
-            listaVersoes = (ArrayList<String>)listaGeral.get(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+    public void executarConsultarVersoes(){
+        aba5Loading.setVisibility(View.VISIBLE);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaVersoes);
-        aba5ListView.setAdapter(adapter);
-        aba5Layout.setVisibility(View.VISIBLE);
+        aba5TextLayout.setVisibility(View.INVISIBLE);
+
         aba5ListLayout.setVisibility(View.VISIBLE);
+        aba5Layout.setVisibility(View.VISIBLE);
+
+        if(!versoesCarregadas){
+            ConsultarVersoes consultar = new ConsultarVersoes(this);
+            consultar.execute();
+        }else{
+            aba5Loading.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public void carregarAba5(List<Object> objects){
+
+        listaGeral = new ArrayList<>();
+
+        listaGeral = objects;
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, (ArrayList<String>)listaGeral.get(1));
+        aba5ListView.setAdapter(adapter);
+        versoesCarregadas = true;
+        aba5Loading.setVisibility(View.INVISIBLE);
+
     }
 
 }
