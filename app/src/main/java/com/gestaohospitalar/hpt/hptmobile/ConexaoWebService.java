@@ -28,7 +28,7 @@ public class ConexaoWebService {
     }
 
     public void classe(String nomeClasse){
-        httpTrans = new HttpTransportSE("http://192.168.0.9:8080/HptMobileWebService/services/"+nomeClasse+"?wsdl");
+        httpTrans = new HttpTransportSE("http://192.168.0.8:8080/HptMobileWebService/services/"+nomeClasse+"?wsdl");
     }
 
     public void adicionarAtributo(String nomeAtributo, Object o){

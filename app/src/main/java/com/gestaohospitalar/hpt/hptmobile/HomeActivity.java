@@ -129,9 +129,9 @@ public class HomeActivity extends AppCompatActivity {
     public void carregarAba5(){
 
         ConsultarVersoes consultar = new ConsultarVersoes();
-        String[] listaVersoes = new String[1];
+
         try {
-            listaVersoes = consultar.execute().get();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
