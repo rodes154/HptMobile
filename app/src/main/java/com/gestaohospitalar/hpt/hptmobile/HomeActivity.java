@@ -17,8 +17,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -37,7 +39,8 @@ public class HomeActivity extends AppCompatActivity {
     private ListView aba5ListView;
 
     //Layouts
-    RelativeLayout geralLayout,aba2Layout,aba3Layout,aba4Layout,aba5Layout;
+    RelativeLayout geralLayout,aba2Layout,aba3Layout,aba4Layout,aba5ListLayout;
+    FrameLayout aba5Layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,8 @@ public class HomeActivity extends AppCompatActivity {
         aba2Layout = (RelativeLayout)(findViewById(R.id.aba2Layout));
         aba3Layout = (RelativeLayout)(findViewById(R.id.aba3Layout));
         aba4Layout = (RelativeLayout)(findViewById(R.id.aba4Layout));
-        aba5Layout = (RelativeLayout)(findViewById(R.id.aba5Layout));
+        aba5Layout = (FrameLayout) (findViewById(R.id.aba5Layout));
+        aba5ListLayout = (RelativeLayout) findViewById(R.id.aba5ListLayout);
 
         configButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +68,24 @@ public class HomeActivity extends AppCompatActivity {
                 showPopup(v);
             }
         });
+
+        aba5ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch ((int)id){
+                    case 1:
+                        System.out.println("1");
+
+                    case 2:
+                        System.out.println("2");
+
+                    case 3:
+                        System.out.println("3");
+
+                }
+            }
+        });
+
 
 
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -142,9 +164,9 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaVersoes);
-        System.out.println(listaVersoes);
         aba5ListView.setAdapter(adapter);
         aba5Layout.setVisibility(View.VISIBLE);
+        aba5ListLayout.setVisibility(View.VISIBLE);
     }
 
 }
