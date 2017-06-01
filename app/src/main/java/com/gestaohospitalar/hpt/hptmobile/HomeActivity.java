@@ -24,6 +24,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -129,9 +130,11 @@ public class HomeActivity extends AppCompatActivity {
     public void carregarAba5(){
 
         ConsultarVersoes consultar = new ConsultarVersoes();
-
+        List<Object> listaGeral = new  ArrayList<>();
+        List<String> listaVersoes = new ArrayList<>();
         try {
-
+            listaGeral = consultar.execute().get();
+            listaVersoes = (ArrayList<String>)listaGeral.get(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
