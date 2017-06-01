@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity {
 
                 aba5LogTextView.setText(((ArrayList<String>) (listaGeral.get(2))).get((int)id));
 
-                System.out.println(aba5LogTextView.getText());
                 aba5ListLayout.setVisibility(View.INVISIBLE);
                 aba5TextLayout.setVisibility(View.VISIBLE);
 

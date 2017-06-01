@@ -18,6 +18,8 @@ public class ValidarCredenciais extends AsyncTask <String[], Boolean ,Boolean> {
     @Override
     protected Boolean doInBackground(String[]... params) {
 
+        Object respostaDefinitiva = new Object();
+
         ConexaoWebService conexaoWebService = new ConexaoWebService();
 
         conexaoWebService.metodo("validarLogin");
@@ -25,8 +27,11 @@ public class ValidarCredenciais extends AsyncTask <String[], Boolean ,Boolean> {
         conexaoWebService.adicionarAtributo("user",params[0][0]);
         conexaoWebService.adicionarAtributo("pass",params[0][1]);
         Object resposta = conexaoWebService.realizarConexao();
+        if(resposta!=null){
+            respostaDefinitiva=resposta;
+        }
 
-        if(resposta.toString().equals("true")){
+        if(respostaDefinitiva.toString().equals("true")){
             System.out.println("logged in");
             return true;
         }else{
