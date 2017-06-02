@@ -34,6 +34,8 @@ public class ConsultarVersoes extends AsyncTask<Void, Void ,List<Object>>{
         Gson gson = new Gson();
         Map<Integer,List<String>> mapObject = gson.fromJson(jsonData,new TypeToken<Map<Integer,List<String>>>(){}.getType());
 
+
+
         List<Integer> keys = new ArrayList<>();
         List<String> nomes = new ArrayList<>();
         List<String> logs = new ArrayList<>();

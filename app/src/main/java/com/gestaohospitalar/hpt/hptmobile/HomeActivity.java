@@ -185,7 +185,6 @@ public class HomeActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, (ArrayList<String>)listaGeral.get(1));
         aba5ListView.setAdapter(adapter);
-        System.out.println(adapter.getCount());
         if(adapter.getCount()>1){
             versoesCarregadas = true;
         }

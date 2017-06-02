@@ -32,7 +32,6 @@ public class ValidarCredenciais extends AsyncTask <String[], Boolean ,Boolean> {
         }
 
         if(respostaDefinitiva.toString().equals("true")){
-            System.out.println("logged in");
             return true;
         }else{
             return false;
