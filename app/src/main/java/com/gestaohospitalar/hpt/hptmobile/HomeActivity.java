@@ -97,10 +97,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        aba5LogTextView.setMovementMethod(new ScrollingMovementMethod());
-
-
-
         bottomBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -126,7 +122,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        aba5LogTextView.setMovementMethod(new ScrollingMovementMethod());
     }
+
 
     private void trocarLayout(int aba){
 
@@ -187,7 +185,10 @@ public class HomeActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, (ArrayList<String>)listaGeral.get(1));
         aba5ListView.setAdapter(adapter);
-        versoesCarregadas = true;
+        System.out.println(adapter.getCount());
+        if(adapter.getCount()>1){
+            versoesCarregadas = true;
+        }
         aba5Loading.setVisibility(View.INVISIBLE);
 
     }

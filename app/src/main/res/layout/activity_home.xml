@@ -46,7 +46,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_gravity="left"
-                    android:background="@drawable/config_76" />
+                    android:background="@drawable/config_76"
+                    android:onClick="showPopup" />
 
             </android.support.v7.widget.Toolbar>
 
